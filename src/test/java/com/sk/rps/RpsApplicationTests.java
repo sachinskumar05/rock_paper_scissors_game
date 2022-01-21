@@ -1,4 +1,4 @@
-package com.sachin.rps;
+package com.sk.rps;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

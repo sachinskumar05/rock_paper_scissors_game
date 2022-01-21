@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: "@project.name@"
+  main:
+    banner-mode: off
+
+app-cfg:
