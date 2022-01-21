@@ -1,7 +1,10 @@
 package com.sk.rps.player;
 
 import com.sk.rps.game.GameOptions;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +16,9 @@ import java.util.Scanner;
 public class Human implements Player {
 
     private String name;
-    Scanner sc = new Scanner(System.in);
+
+    @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
+    private final Scanner sc = new Scanner(System.in);
 
     public void requestPlayerName() {
         log.info("Please enter your name");
@@ -29,7 +34,6 @@ public class Human implements Player {
 
     public boolean repeat() {
         // This function will ask if the user wants to play again and return true or false accordingly.
-        sc = new Scanner(System.in);
         log.info("To play again? \n\t enter (y) if yes  \n\t or any other character to end the game");
         String userInput = sc.nextLine();
         userInput = userInput.toUpperCase();
