@@ -18,7 +18,7 @@ public class Human implements Player {
     private String name;
 
     @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in,"utf-8");
 
     public void requestPlayerName() {
         log.info("Please enter your name");
