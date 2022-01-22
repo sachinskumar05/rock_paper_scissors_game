@@ -1,10 +1,10 @@
 package com.sk.rps.game;
 
-public enum GameOptions {
+public enum CHOICES {
     ROCK(1), PAPER(2), SCISSORS(3);
     private final int value;
 
-    GameOptions(int value){
+    CHOICES(int value){
         this.value = value;
     }
 
@@ -12,7 +12,7 @@ public enum GameOptions {
         return this.value;
     }
 
-    public static GameOptions valueOf(int value) {
+    public static CHOICES valueOf(int value) {
         switch(value) {
             case 'r':
             case 'R':

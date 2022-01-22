@@ -3,38 +3,38 @@ package com.sk.rps.game;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import static com.sk.rps.game.GameOptions.*;
+import static com.sk.rps.game.CHOICES.*;
 
 @Log4j2
 @Service
 public class ResultService {
 
-    public void display(String who, GameOptions s) {
+    public void display(String player, CHOICES s) {
         switch (s) {
             case ROCK:
-                log.info(who + " selected ---> ROCK ");
+                log.info(player + " selected => ROCK ");
                 break;
             case PAPER:
-                log.info(who + " selected ---> PAPER ");
+                log.info(player + " selected => PAPER ");
                 break;
             case SCISSORS:
-                log.info(who + " selected ---> SCISSORS ");
+                log.info(player + " selected => SCISSORS ");
                 break;
             default:
                 break;
         }
     }
 
-    public int execute(GameOptions humanChosen, GameOptions computerChosen) {
-        if ( humanChosen == computerChosen ) return 0;
+    public RESULT execute(CHOICES humanChosen, CHOICES computerChosen) {
+        if ( humanChosen == computerChosen ) return RESULT.TIE;
         switch (humanChosen) {
             case ROCK:
-                return (computerChosen == SCISSORS ? 1 : -1);
+                return (computerChosen == SCISSORS ? RESULT.WON : RESULT.LOST);
             case PAPER:
-                return (computerChosen == ROCK ? 1 : -1);
+                return (computerChosen == ROCK ? RESULT.WON : RESULT.LOST);
             case SCISSORS:
-                return (computerChosen == PAPER ? 1 : -1);
+                return (computerChosen == PAPER ? RESULT.WON : RESULT.LOST);
         }
-        return 0;
+        return RESULT.TIE;
     }
 }

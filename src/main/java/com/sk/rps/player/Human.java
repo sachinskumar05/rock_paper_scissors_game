@@ -1,7 +1,7 @@
 package com.sk.rps.player;
 
 import com.sk.rps.config.AppConfig;
-import com.sk.rps.game.GameOptions;
+import com.sk.rps.game.CHOICES;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -15,37 +15,48 @@ import javax.annotation.PostConstruct;
 import java.util.Scanner;
 
 @Log4j2
-@Data
 @Component
 @ComponentScan(value = "com.sk.rps")
 public class Human implements Player {
     @Autowired
     private AppConfig appConfig;
-
-    private String playerName;
-
+    @Getter
+    private String name;
+    @Getter
     private int maxRetryInvalidArguments;
+
+    @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
+    private Scanner sc ;
+
+    public Human(){
+    }
+
+    public Human(Scanner sc, AppConfig appConfig) {
+        this.sc = sc;
+        this.appConfig = appConfig;
+    }
 
     @PostConstruct
     public void init() {
         maxRetryInvalidArguments = appConfig.getMaxRetryInvalidArguments();
+        if( null== sc ){
+            sc = new Scanner(System.in,"utf-8");
+        }
     }
-
-    @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
-    private final Scanner sc = new Scanner(System.in,"utf-8");
 
     public void requestPlayerName() {
         log.info("Please enter your name");
-        playerName = sc.next();
+        name = sc.next();
     }
 
-    public GameOptions choose() {
+    public CHOICES choose() {
         String input = null;
         for(int retryCount = 0; retryCount < maxRetryInvalidArguments + 1; retryCount++ ) {
             try {
-                log.info("\nChoose one from below choices:\n\t \t r => ROCK \n\t\t p => PAPER \n\t\t s => SCISSOR");
+                log.info("\nWelcome \t{}", name);
+                log.info("\nChoose one from below choices:\n\t\t r => ROCK \n\t\t p => PAPER \n\t\t s => SCISSOR");
                 input = sc.next();
-                return GameOptions.valueOf(input.charAt(0));
+                return CHOICES.valueOf(input.charAt(0));
             } catch (IllegalArgumentException e) {
                 log.error("Invalid Choice {}, Please Try One More Time, {} more chance left.",
                         input, (maxRetryInvalidArguments - retryCount) );
@@ -58,10 +69,9 @@ public class Human implements Player {
     }
 
     public boolean repeat() {
-        sc.nextLine();//Just to hold the line for next input
-        log.info("\n\t\t To play again please enter (y) \n\t\t Otherwise Press ENTER to end the game");
+        log.info("\n\t\t To Try another game, please enter (y) \n\t\t Otherwise Press ENTER or Any other to end the game");
         String userInput = sc.nextLine();
-        if( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit
+        if( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
             return false;
         }
         userInput = userInput.toUpperCase();

@@ -1,6 +1,7 @@
 package com.sk.rps.player;
 
-import com.sk.rps.game.GameOptions;
+import com.sk.rps.game.CHOICES;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,12 @@ import java.util.Random;
 @Component
 @ComponentScan(value = "com.sk.rps")
 public class Computer implements Player {
+    @Getter
+    private String name = "Computer";
+
     private final Random random = new Random();
 
-    public GameOptions getInput() {
-        return GameOptions.valueOf(random.nextInt(3)+1);
+    public CHOICES getInput() {
+        return CHOICES.valueOf(random.nextInt(3)+1);
     }
 }
