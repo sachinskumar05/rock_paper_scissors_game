@@ -8,4 +8,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties("app-cfg")
 public class AppConfig {
+    private int maxRetryInvalidArguments;
 }

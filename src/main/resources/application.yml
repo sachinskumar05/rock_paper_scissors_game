@@ -5,3 +5,4 @@ spring:
     banner-mode: off
 
 app-cfg:
+  max-retry-invalid-arguments: 3

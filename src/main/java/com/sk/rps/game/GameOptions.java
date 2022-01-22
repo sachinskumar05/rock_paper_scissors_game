@@ -26,7 +26,7 @@ public enum GameOptions {
             case 'S':
             case 3:
                 return SCISSORS;
-            default: throw new IllegalArgumentException("Not Supported");
+            default: throw new IllegalArgumentException("Choice Not Supported");
         }
     }
 

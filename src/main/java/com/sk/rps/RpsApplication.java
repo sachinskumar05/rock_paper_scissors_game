@@ -1,24 +1,27 @@
 package com.sk.rps;
 
 import com.sk.rps.game.RPSEngine;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class RpsApplication {
 
+	@Autowired
+	private RPSEngine rpsEngine;
+
 	public static void main(String[] args) {
 
-		SpringApplication.run(RpsApplication.class, args);
+		ApplicationContext ctx = SpringApplication.run(RpsApplication.class, args);
+		RpsApplication rps = ctx.getBean(RpsApplication.class);
 
-		RPSEngine rpsLogic = new RPSEngine();
+		rps.rpsEngine.recordHumanPlayerName();
 
-		//get the player's name
-		rpsLogic.recordHumanPlayerName();
-
-		//start the game
-		rpsLogic.startGame();
-
+		do {
+			rps.rpsEngine.startGame();
+		} while(rps.rpsEngine.isRepeat());
 
 	}
 
