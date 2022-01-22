@@ -49,6 +49,7 @@ public class Human implements Player {
         name = sc.next();
     }
 
+    @Override
     public CHOICES choose() {
         String input = null;
         for(int retryCount = 0; retryCount < maxRetryInvalidArguments + 1; retryCount++ ) {

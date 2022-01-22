@@ -17,7 +17,8 @@ public class Computer implements Player {
 
     private final Random random = new Random();
 
-    public CHOICES getInput() {
+    @Override
+    public CHOICES choose() {
         return CHOICES.valueOf(random.nextInt(3)+1);
     }
 }

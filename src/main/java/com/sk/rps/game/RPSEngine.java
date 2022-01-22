@@ -35,7 +35,7 @@ public class RPSEngine {
 
         resultService.display(human.getName(), humanChosenGameOption);
 
-        CHOICES computerInput = computer.getInput();
+        CHOICES computerInput = computer.choose();
         resultService.display(computer.getName(), computerInput);
 
         RESULT result = resultService.execute(humanChosenGameOption, computerInput);

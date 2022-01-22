@@ -33,6 +33,7 @@ class CHOICESTest {
         CHOICES result = CHOICES.valueOf(3);
         Assertions.assertEquals(CHOICES.SCISSORS, result);
     }
+
     @Test
     void testValueOfSCISSORSChar() {
         CHOICES result = CHOICES.valueOf('s');
@@ -45,6 +46,9 @@ class CHOICESTest {
         Assertions.assertArrayEquals(new CHOICES[]{CHOICES.ROCK, CHOICES.PAPER, CHOICES.SCISSORS}, result);
     }
 
-}
+    @Test
+    void testValueOfThrowsException() {
+        Assertions.assertThrows( IllegalArgumentException.class, ()->RESULT.valueOf("name") );
+    }
 
-//Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme
+}

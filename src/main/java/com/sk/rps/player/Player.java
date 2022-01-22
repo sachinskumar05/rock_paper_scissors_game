@@ -1,5 +1,7 @@
 package com.sk.rps.player;
 
-public interface Player {
+import com.sk.rps.game.CHOICES;
 
+public interface Player {
+    CHOICES choose();
 }

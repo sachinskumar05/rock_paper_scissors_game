@@ -96,7 +96,7 @@ class HumanTest {
         System.setIn(stdin);
         human = new Human(scanner,appConfig);
         boolean result = human.repeat();
-        Assertions.assertEquals(true, result);
+        Assertions.assertTrue(result);
     }
 
     @Test
@@ -108,9 +108,8 @@ class HumanTest {
         System.setIn(stdin);
         human = new Human(scanner,appConfig);
         boolean result = human.repeat();
-        Assertions.assertEquals(false, result);
+        Assertions.assertFalse(result);
     }
 
 }
 
-//Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme
