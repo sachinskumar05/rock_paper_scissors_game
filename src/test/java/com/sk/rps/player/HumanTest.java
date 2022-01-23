@@ -46,7 +46,7 @@ class HumanTest {
         Scanner scanner = new Scanner(System.in);
         System.setIn(stdin);
         human = new Human(scanner,appConfig);
-        human.requestPlayerName();
+        human.setName();
         Assertions.assertEquals(expected, human.getName());
     }
 
@@ -95,7 +95,7 @@ class HumanTest {
         Scanner scanner = new Scanner(System.in);
         System.setIn(stdin);
         human = new Human(scanner,appConfig);
-        boolean result = human.repeat();
+        boolean result = human.canRepeat();
         Assertions.assertTrue(result);
     }
 
@@ -107,8 +107,18 @@ class HumanTest {
         Scanner scanner = new Scanner(System.in);
         System.setIn(stdin);
         human = new Human(scanner,appConfig);
-        boolean result = human.repeat();
+        boolean result = human.canRepeat();
         Assertions.assertFalse(result);
+    }
+
+    @Test
+    void testGetScore(){
+        Assertions.assertEquals(0, human.getScore());
+    }
+
+    @Test
+    void testScoreIncrementAndGet(){
+        Assertions.assertEquals(1, human.scoreIncrementAndGet());
     }
 
 }

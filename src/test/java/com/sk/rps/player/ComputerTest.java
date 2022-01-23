@@ -17,10 +17,31 @@ class ComputerTest {
         MockitoAnnotations.initMocks(this);
     }
 
+
     @Test
-    void testGetInput() {
+    void testChoose() {
         Assertions.assertDoesNotThrow(()->computer.choose());
         CHOICES result = computer.choose();
         Assertions.assertNotNull(result);
     }
+
+    @Test
+    void testSetName(){
+        Assertions.assertThrows(UnsupportedOperationException.class, ()->computer.setName());
+    }
+    @Test
+    void testCanRepeat(){
+        Assertions.assertThrows(UnsupportedOperationException.class, ()->computer.canRepeat());
+    }
+
+    @Test
+    void testGetScore(){
+        Assertions.assertEquals(0, computer.getScore());
+    }
+
+    @Test
+    void testScoreIncrementAndGet(){
+        Assertions.assertEquals(1, computer.scoreIncrementAndGet());
+    }
+
 }

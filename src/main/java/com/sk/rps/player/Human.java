@@ -3,7 +3,6 @@ package com.sk.rps.player;
 import com.sk.rps.config.AppConfig;
 import com.sk.rps.game.CHOICES;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Log4j2
 @Component
@@ -20,10 +20,15 @@ import java.util.Scanner;
 public class Human implements Player {
     @Autowired
     private AppConfig appConfig;
+
     @Getter
     private String name;
+
     @Getter
     private int maxRetryInvalidArguments;
+
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+    private AtomicInteger score = new AtomicInteger(0);
 
     @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
     private Scanner sc ;
@@ -31,7 +36,7 @@ public class Human implements Player {
     public Human(){
     }
 
-    public Human(Scanner sc, AppConfig appConfig) {
+    public Human(Scanner sc, AppConfig appConfig) {//For the test cases
         this.sc = sc;
         this.appConfig = appConfig;
     }
@@ -44,7 +49,7 @@ public class Human implements Player {
         }
     }
 
-    public void requestPlayerName() {
+    public void setName() {
         log.info("Please enter your name");
         name = sc.next();
     }
@@ -69,11 +74,21 @@ public class Human implements Player {
         throw new IllegalArgumentException(String.format("Entered choice is not supported %s", input));
     }
 
-    public boolean repeat() {
-        log.info("\n\t\t To Try another game, please enter (y) \n\t\t Otherwise Press ENTER or Any other to end the game");
-        String userInput = sc.nextLine();
-        if( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
-            return false;
+    @Override
+    public int getScore() {
+        return score.get();
+    }
+
+    @Override
+    public int scoreIncrementAndGet() {
+        return score.incrementAndGet();
+    }
+
+    public boolean canRepeat() {
+        log.info("\n\t\t To Try another game, please enter (y) \n\t\t To end the game, please enter any other key (e.g. n)");
+        String userInput = sc.next();
+        while( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
+            userInput = sc.next();
         }
         userInput = userInput.toUpperCase();
         return userInput.charAt(0) == 'Y';

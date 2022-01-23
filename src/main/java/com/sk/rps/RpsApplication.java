@@ -16,12 +16,19 @@ public class RpsApplication {
 
 		ApplicationContext ctx = SpringApplication.run(RpsApplication.class, args);
 		RpsApplication rps = ctx.getBean(RpsApplication.class);
+		rps.start();
 
-		rps.rpsEngine.recordHumanPlayerName();
+	}
+
+	public void start() {
+
+		rpsEngine.recordHumanPlayerName();
 
 		do {
-			rps.rpsEngine.startGame();
-		} while(rps.rpsEngine.isRepeat());
+
+			rpsEngine.startGame();
+
+		} while( rpsEngine.shouldRepeat() );
 
 	}
 

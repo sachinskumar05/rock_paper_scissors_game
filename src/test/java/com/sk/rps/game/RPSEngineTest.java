@@ -29,10 +29,10 @@ class RPSEngineTest {
 
     @Test
     void testIsRepeat() {
-        when(human.repeat()).thenReturn(true);
+        when(human.canRepeat()).thenReturn(true);
         when(human.getName()).thenReturn("TEST");
 
-        boolean result = rPSEngine.isRepeat();
+        boolean result = rPSEngine.shouldRepeat();
         Assertions.assertTrue(result);
     }
 
