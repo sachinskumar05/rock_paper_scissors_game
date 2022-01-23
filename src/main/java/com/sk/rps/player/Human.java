@@ -64,7 +64,7 @@ public class Human implements Player {
                 input = sc.next();
                 return CHOICES.valueOf(input.charAt(0));
             } catch (IllegalArgumentException e) {
-                log.error("Invalid Choice {}, Please Try One More Time, {} more chance left.",
+                log.error("Invalid Choice {}, Please try one more time, {} more chance left.",
                         input, (maxRetryInvalidArguments - retryCount) );
                 if( retryCount == maxRetryInvalidArguments ) {
                     throw e;
@@ -98,7 +98,8 @@ public class Human implements Player {
             } else if(userInput.charAt(0) == 'N') {
                 return false;
             }
-            log.info("Please retry: Valid entries expected are, y or n ");
+            log.info("Please retry: Valid entries expected are ( y or n ) only. Please try one more time, {} more chance left.",
+                    ( maxRetryInvalidArguments - retryCount));
         }
         throw new IllegalArgumentException(String.format("Invalid instruction received %s", userInput));
     }
