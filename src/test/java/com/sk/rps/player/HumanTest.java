@@ -12,13 +12,14 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 import static org.mockito.Mockito.*;
 
 @Log4j2
 class HumanTest {
-
+    private static String UTF8_ENCODING = "utf-8";
     @Mock
     AppConfig appConfig;
 
@@ -41,10 +42,12 @@ class HumanTest {
     @Test
     void testRequestPlayerName() {
         String expected = "SK";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in,UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         human.setName();
         Assertions.assertEquals(expected, human.getName());
@@ -53,10 +56,12 @@ class HumanTest {
     @Test
     void testChooseROCK() {
         String expected = "r";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in, UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         CHOICES result = human.choose();
         Assertions.assertEquals(CHOICES.ROCK, result);
@@ -65,10 +70,12 @@ class HumanTest {
     @Test
     void testChoosePAPER() {
         String expected = "p";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in, UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         CHOICES result = human.choose();
 
@@ -78,10 +85,12 @@ class HumanTest {
     @Test
     void testChooseSCISSORS() {
         String expected = "s";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in, UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         CHOICES result = human.choose();
         Assertions.assertEquals(CHOICES.SCISSORS, result);
@@ -90,10 +99,12 @@ class HumanTest {
     @Test
     void testRepeatYes() {
         String expected = "y";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in, UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         boolean result = human.canRepeat();
         Assertions.assertTrue(result);
@@ -102,10 +113,12 @@ class HumanTest {
     @Test
     void testRepeatNo() {
         String expected = "n";
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(expected.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.setIn(stdin);
+        try {
+            System.setIn(new ByteArrayInputStream(expected.getBytes(UTF8_ENCODING)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Scanner scanner = new Scanner(System.in, UTF8_ENCODING);
         human = new Human(scanner,appConfig);
         boolean result = human.canRepeat();
         Assertions.assertFalse(result);

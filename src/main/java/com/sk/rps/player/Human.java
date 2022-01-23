@@ -36,7 +36,7 @@ public class Human implements Player {
     public Human(){
     }
 
-    public Human(Scanner sc, AppConfig appConfig) {//For the test cases
+    Human(Scanner sc, AppConfig appConfig) {//For the test cases
         this.sc = sc;
         this.appConfig = appConfig;
     }
