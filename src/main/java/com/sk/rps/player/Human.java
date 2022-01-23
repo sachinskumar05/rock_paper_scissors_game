@@ -25,7 +25,7 @@ public class Human implements Player {
     private String name;
 
     @Getter
-    private int maxRetryInvalidArguments;
+    private int maxRetryInvalidArguments = 3;
 
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private AtomicInteger score = new AtomicInteger(0);
@@ -45,7 +45,7 @@ public class Human implements Player {
     public void init() {
         maxRetryInvalidArguments = appConfig.getMaxRetryInvalidArguments();
         if( null== sc ){
-            sc = new Scanner(System.in,"utf-8");
+            sc = new Scanner(System.in, UTF_8);
         }
     }
 
@@ -87,7 +87,7 @@ public class Human implements Player {
     public boolean canRepeat() {
         String userInput = null;
         for( int retryCount=0; retryCount < maxRetryInvalidArguments; retryCount++ ) {
-            log.info("\n\tTo Try Again:\n\t\t y => NEW GAME\n\t\t n => END The Game");
+            log.info("\n\tTry Another Game ? \n\t\t y => NEW GAME\n\t\t n => EXIT");
             userInput = sc.next();
             while( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
                 userInput = sc.next();
