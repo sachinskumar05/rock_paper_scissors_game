@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 @Log4j2
 class HumanTest {
-    private static String UTF8_ENCODING = "utf-8";
+    private static final String UTF8_ENCODING = "utf-8";
     @Mock
     AppConfig appConfig;
 
