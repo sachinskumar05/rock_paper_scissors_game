@@ -19,19 +19,7 @@ public class DisplayService {
     private Computer computer;
 
     public void display(String player, CHOICES s) {
-        switch (s) {
-            case ROCK:
-                log.info(player + " selected => ROCK ");
-                break;
-            case PAPER:
-                log.info(player + " selected => PAPER ");
-                break;
-            case SCISSORS:
-                log.info(player + " selected => SCISSORS ");
-                break;
-            default:
-                break;
-        }
+        log.info(player + " selected => {} ", s.toString());
     }
 
     private static final String RESULT_FORMAT = "%15s %15s";
