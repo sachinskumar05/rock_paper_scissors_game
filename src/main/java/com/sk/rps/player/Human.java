@@ -60,7 +60,7 @@ public class Human implements Player {
         for(int retryCount = 0; retryCount < maxRetryInvalidArguments + 1; retryCount++ ) {
             try {
                 log.info("\nWelcome \t{}", name);
-                log.info("\nChoose one from below choices:\n\t\t r => ROCK \n\t\t p => PAPER \n\t\t s => SCISSOR");
+                log.info("\n\tChoose one from below choices:\n\t\t r => ROCK \n\t\t p => PAPER \n\t\t s => SCISSOR");
                 input = sc.next();
                 return CHOICES.valueOf(input.charAt(0));
             } catch (IllegalArgumentException e) {
@@ -85,12 +85,21 @@ public class Human implements Player {
     }
 
     public boolean canRepeat() {
-        log.info("\n\t\t To Try another game, please enter (y) \n\t\t To end the game, please enter any other key (e.g. n)");
-        String userInput = sc.next();
-        while( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
+        String userInput = null;
+        for( int retryCount=0; retryCount < maxRetryInvalidArguments; retryCount++ ) {
+            log.info("\n\tTo Try Again:\n\t\t y => NEW GAME\n\t\t n => END The Game");
             userInput = sc.next();
+            while( null == userInput || userInput.trim().isEmpty() ) {//Capturing ENTER to exit the game
+                userInput = sc.next();
+            }
+            userInput = userInput.toUpperCase();
+            if( userInput.charAt(0) == 'Y' ) {
+                return true;
+            } else if(userInput.charAt(0) == 'N') {
+                return false;
+            }
+            log.info("Please retry: Valid entries expected are, y or n ");
         }
-        userInput = userInput.toUpperCase();
-        return userInput.charAt(0) == 'Y';
+        throw new IllegalArgumentException(String.format("Invalid instruction received %s", userInput));
     }
 }

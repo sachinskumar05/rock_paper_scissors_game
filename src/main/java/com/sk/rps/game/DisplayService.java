@@ -48,7 +48,7 @@ public class DisplayService {
         log.info(String.format(RESULT_FORMAT, "------", "------"));
         log.info(String.format(RESULT_FORMAT, human.getName(), humanScore));
         log.info(String.format(RESULT_FORMAT, computer.getName(), computerScore));
-        log.info(String.format(RESULT_FORMAT, "Game TIE's", (totalGamesPlayed - (humanScore+ computerScore))));
+        log.info(String.format(RESULT_FORMAT, "Game TIE's", (totalGamesPlayed - (humanScore + computerScore))));
         log.info(String.format("%30s", LINE));
 
         log.info("");

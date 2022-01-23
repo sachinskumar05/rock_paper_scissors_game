@@ -46,7 +46,6 @@ public class RPSEngine {
             case LOST:
                 log.info("{} WINS against {}, new score is {}",
                         computer.getName(), human.getName(), computer.scoreIncrementAndGet());
-                computer.scoreIncrementAndGet();
                 break;
             default: {
                 throw new IllegalArgumentException(String.format("Unexpected Result Received %s", result));

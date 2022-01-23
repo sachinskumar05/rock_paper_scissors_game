@@ -16,8 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ComponentScan(value = "com.sk.rps")
 public class Computer implements Player {
 
-    @Getter
-    private String name = "Computer";
+    private static final String NAME = "Computer";
 
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private AtomicInteger score = new AtomicInteger(0);
@@ -28,6 +27,11 @@ public class Computer implements Player {
     @Override
     public CHOICES choose() {
         return CHOICES.valueOf(random.nextInt(3)+1);
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 
     @Override
