@@ -50,8 +50,8 @@ public class Human implements Player {
     }
 
     public void setName() {
-        log.info("Please enter your name");
-        name = sc.next();
+        log.info("\n\tPlease enter your name");
+        name = sc.nextLine();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class Human implements Player {
                 return CHOICES.valueOf(input.charAt(0));
             } catch (IllegalArgumentException e) {
                 log.error("Invalid Choice {}, Please try one more time, {} more chance left.",
-                        input, (maxRetryInvalidArguments - retryCount) );
-                if( retryCount == maxRetryInvalidArguments ) {
+                        input, (maxRetryInvalidArguments - (retryCount+1) ) );
+                if( retryCount == maxRetryInvalidArguments-1 ) {
                     throw e;
                 }
             }
@@ -99,7 +99,7 @@ public class Human implements Player {
                 return false;
             }
             log.info("Please retry: Valid entries expected are ( y or n ) only. Please try one more time, {} more chance left.",
-                    ( maxRetryInvalidArguments - retryCount));
+                    ( maxRetryInvalidArguments - (retryCount+1) ));
         }
         throw new IllegalArgumentException(String.format("Invalid instruction received %s", userInput));
     }
