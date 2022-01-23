@@ -18,10 +18,6 @@ public class DisplayService {
     @Autowired
     private Computer computer;
 
-    public void display(String player, CHOICES s) {
-        log.info(player + " selected => {} ", s.toString());
-    }
-
     private static final String RESULT_FORMAT = "%15s %15s";
     private static final String LINE = "---------------------------------";
 

@@ -29,12 +29,12 @@ public class RPSEngine {
     public void startGame() {
 
         CHOICES humanChoice = human.choose();
-        displayService.display(human.getName(), humanChoice);
+        log.info("{} selected => {} ", human.getName(), humanChoice );
 
-        CHOICES computerInput = computer.choose();
-        displayService.display(computer.getName(), computerInput);
+        CHOICES computerChoice = computer.choose();
+        log.info( "{} selected => {} ", computer.getName(), computerChoice );
 
-        RESULT result = resultService.execute(humanChoice, computerInput);
+        RESULT result = resultService.execute(humanChoice, computerChoice);
         switch (result) {
             case TIE:
                 log.info("TIE!");
